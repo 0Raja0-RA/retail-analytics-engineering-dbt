@@ -1,0 +1,14 @@
+name: analytics_engineering_lab
+version: '1.0.0'
+config-version: 2
+profile: analytics_engineering_lab
+model-paths: [models]
+test-paths: [tests]
+models:
+  analytics_engineering_lab:
+    staging:
+      +materialized: view
+    intermediate:
+      +materialized: view
+    marts:
+      +materialized: table

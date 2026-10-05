@@ -1,0 +1,7 @@
+analytics_engineering_lab:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: ../analytics.duckdb
+      threads: 4
