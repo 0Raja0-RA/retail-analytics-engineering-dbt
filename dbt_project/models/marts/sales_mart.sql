@@ -1,0 +1,1 @@
+select d.year, d.month, c.segment, c.region, p.category_name as category, sum(f.sales_amount) as total_sales, sum(f.quantity) as total_quantity from {{ ref('fct_sales') }} f join {{ ref('dim_customer') }} c on f.customer_id=c.customer_id join {{ ref('dim_product') }} p on f.product_id=p.product_id join {{ ref('dim_date') }} d on f.order_date=d.full_date group by 1,2,3,4,5
