@@ -1,0 +1,52 @@
+version: 2
+sources:
+  - name: raw
+    schema: raw
+    description: "Raw operational data loaded for the laboratory."
+    tables:
+      - name: customers
+      - name: products
+      - name: orders
+      - name: payments
+models:
+  - name: dim_customer
+    description: "Customer dimension for sales analysis."
+    columns:
+      - name: customer_id
+        description: "Business identifier of customer."
+        tests:
+          - unique
+          - not_null
+  - name: dim_product
+    description: "Product dimension for sales analysis."
+    columns:
+      - name: product_id
+        tests:
+          - unique
+          - not_null
+  - name: fct_sales
+    description: "Sales fact at one row per order line."
+    columns:
+      - name: order_id
+        tests:
+          - unique
+          - not_null
+      - name: customer_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_customer')
+              field: customer_id
+      - name: product_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_product')
+              field: product_id
+  - name: sales_mart
+    description: "Aggregated sales by month, customer segment, region, and product category."
+    columns:
+      - name: total_sales
+        description: "Sum of sales amount."
+      - name: total_quantity
+        description: "Sum of quantity sold."
