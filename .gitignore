@@ -9,6 +9,8 @@ target/
 dbt_packages/
 logs/
 *.log
+.user.yml
+dbt_project/.user.yml
 
 # DuckDB & Local Databases
 *.duckdb
